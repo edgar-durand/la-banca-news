@@ -1,0 +1,24 @@
+<div class="card" [ngStyle]="{'border-left': !isEven ? '1px dotted #ccc' : 'none'}">
+  <article *ngIf="item.visible">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="handleEdit()">
+        <mat-icon>edit</mat-icon>
+        <span>Editar</span>
+      </button>
+      <button mat-menu-item (click)="handleDelete()">
+        <mat-icon>delete</mat-icon>
+        <span>Eliminar</span>
+      </button>
+    </mat-menu>
+
+    <h2 class="article-title">{{item.titulo}}
+      <span class="article-date">{{item.fecha}}</span>
+    </h2>
+    <img class="news-img" [src]="item.imagen_titulo.normal.url" alt="">
+    <div [innerHTML]="item.content"></div>
+  </article>
+
+</div>

@@ -5,7 +5,7 @@
   margin: -15px auto 10px;
   width: 80%;
   max-width: 62.5em;
-  box-shadow: 3px 3px 0px rgba(0,0,0,0.04);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
 .main-content header {
@@ -13,7 +13,7 @@
   top: 15px;
   text-transform: uppercase;
   min-width: 420px;
-  font-family: "Lato", "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 .main-content header h2 {
@@ -45,38 +45,11 @@
   align-items: stretch;
 }
 
-.article-title {
-  font-family: "Lato";
-  font-weight: bold;
-  font-size: 18px !important;
-  color: #1969be !important;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  text-rendering: optimizeLegibility;
-  margin-top: 0.2em;
-}
-
 .article-date {
   font-size: 12px;
   font-weight: normal;
   color: #888;
   display: block;
-}
-.card {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  width: 45%;
-
-  border-bottom: 1px dotted #ccc;
-}
-
-.refresh-btn {
-  position: fixed;
-  color: burlywood !important;
-  top: 1rem;
-  right: 1rem;
-  z-index: 99999;
 }
 
 ::ng-deep.mat-icon-button {
@@ -95,12 +68,11 @@
   .main-content header span {
     font-size: 20px;
   }
+}
 
-  .card {
-    padding: .1rem;
-    width: 90%;
-    border-left: none!important;
-  }
+app-card {
+  max-width: 50%;
+  display: contents;
 }
 
 @media (max-width: 280px) {
@@ -115,10 +87,5 @@
 
   .main-content header span {
     font-size: 15px;
-  }
-
-  .card {
-    padding: 0;
-    border-left: none!important;
   }
 }

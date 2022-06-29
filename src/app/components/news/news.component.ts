@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {NewsService} from "../../services/news.service";
-import {MatDialog} from "@angular/material/dialog";
-import {EditDialogComponent} from "../edit-dialog/edit-dialog.component";
 import {INews} from "../../interfaces/INews";
 
 @Component({
@@ -9,40 +7,16 @@ import {INews} from "../../interfaces/INews";
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
-
-  constructor(
-    public newsService: NewsService,
-    public dialog: MatDialog
-  ) { }
-
-  ngOnInit(): void {
-    const savedNews = localStorage.getItem('news');
-    if (savedNews) {
-      this.newsService.news$.next(<INews[]>JSON.parse(savedNews))
-    } else {
-      this.newsService.refreshNews();
-    }
+export class NewsComponent {
+  constructor(public newsService: NewsService) {
   }
 
-  handleEdit(id: number, content: string) {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: {
-        content
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.newsService.editNews(id, dialogRef.componentInstance.content);
-      }
-    });
+  handleEdit(item: INews) {
+    this.newsService.editNews(item.id, item.content);
   }
 
-  handleDelete(id: number){
+  handleDelete(item: INews) {
     //TODO: Confirm delete
-    this.newsService.deleteNews(id);
+    this.newsService.deleteNews(item.id);
   }
-
-
 }

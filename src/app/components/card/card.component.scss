@@ -1,0 +1,39 @@
+.news-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 45%;
+
+  border-bottom: 1px dotted #ccc;
+}
+
+.news-img {
+  float: right;
+  margin: 0 5px 0 15px;
+  height: auto;
+  aspect-ratio: auto 100 / 120;
+  width: 100px;
+}
+
+@media (max-width: 830px) {
+
+  .card {
+    padding: .1rem;
+    width: 90%;
+    border-left: none !important;
+  }
+}
+
+@media (max-width: 280px) {
+  .card {
+    padding: 0;
+    border-left: none !important;
+  }
+}

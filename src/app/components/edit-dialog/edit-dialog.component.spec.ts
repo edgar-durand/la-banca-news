@@ -1,7 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditDialogComponent } from './edit-dialog.component';
+import {EditDialogComponent} from './edit-dialog.component';
 import {DebugElement} from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
+import {By} from "@angular/platform-browser";
 
 describe('EditDialogComponent', () => {
   let component: EditDialogComponent;
@@ -10,9 +12,11 @@ describe('EditDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditDialogComponent ]
+      imports: [MatDialogModule],
+      declarations: [EditDialogComponent],
+      providers: [{provide: MAT_DIALOG_DATA, useValue: {content: 'test'}}]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -24,5 +28,7 @@ describe('EditDialogComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    const h2 = de.query(By.css('h2'));
+    expect(h2.nativeElement.innerText).toBe('Editar noticia');
   });
 });
