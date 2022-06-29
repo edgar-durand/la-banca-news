@@ -1,0 +1,38 @@
+<div class="line-blue">
+
+</div>
+<div class="main-content">
+  <button class="refresh-btn" mat-icon-button matTooltip="Refrescar noticias" (click)="newsService.refreshNews()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+  <header>
+    <h2>Archivo de noticias</h2>
+    <span>Institucional</span>
+  </header>
+  <section class="news-content">
+    <div class="card" [ngStyle]="{'border-left': i % 2 !== 0 ? '1px dotted #ccc' : 'none'}" *ngFor="let news of (newsService.news$ | async); index as i">
+      <article *ngIf="news.visible">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="handleEdit(news.id, news.content)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="handleDelete(news.id)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </mat-menu>
+
+        <h2 class="article-title">{{news.titulo}}
+          <span class="article-date">{{news.fecha}}</span>
+        </h2>
+        <img class="news-img" [src]="news.imagen_titulo.normal.url" alt="">
+        <div [innerHTML]="news.content"></div>
+      </article>
+
+    </div>
+  </section>
+</div>
