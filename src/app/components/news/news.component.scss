@@ -71,14 +71,6 @@
   border-bottom: 1px dotted #ccc;
 }
 
-.refresh-btn {
-  position: fixed;
-  color: burlywood !important;
-  top: 1rem;
-  right: 1rem;
-  z-index: 99999;
-}
-
 ::ng-deep.mat-icon-button {
   float: right;
 }
