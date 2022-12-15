@@ -46,4 +46,4 @@ jobs:
           export_default_credentials: true
 
       - name: Deploy Web component
-        run: gsutil rsync -m -d -r dist $CDN_BUCKET/$MAJOR.$MINOR.$PATCH
+        run: gsutil rsync -d -r dist $CDN_BUCKET/$MAJOR.$MINOR.$PATCH
