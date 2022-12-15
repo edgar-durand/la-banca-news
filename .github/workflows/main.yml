@@ -42,4 +42,4 @@ jobs:
         run: gsutil rsync -d -r dist gs://test_cdn_starter
 
       - name: Invalidate CDN Cache
-        run: gcloud compute url-maps invalidate-cdn-cache lb-web --path "/*"
+        run: gcloud compute url-maps invalidate-cdn-cache lb-web --path "/*" --async
