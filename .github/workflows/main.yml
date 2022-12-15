@@ -16,9 +16,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-          
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
         
       - name: Install Dependencies
         run: npm i
@@ -40,8 +37,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
  
       - name: Install Dependencies
         run: npm i
