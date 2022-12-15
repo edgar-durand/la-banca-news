@@ -30,16 +30,18 @@ jobs:
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
+#         with:
+#           project_id: ${{ secrets.GCP_PROJECT_ID }}
+#           service_account_key: ${{ secrets.GCP_SA_KEY }}
+#           export_default_credentials: true
 
       - name: Deploy Web component
         run: gsutil rsync -d -r dist gs://test_cdn_starter
 
       - name: Invalidate CDN Cache
-        run: gcloud compute url-maps invalidate-cdn-cache lb-web --path "/*" --async
+        run: gcloud compute url-maps invalidate-cdn-cache lb-web --path '/*' --async
