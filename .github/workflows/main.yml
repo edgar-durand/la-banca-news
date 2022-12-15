@@ -3,26 +3,38 @@ name: Web Component CI/CD
 on:
   push:
     branches:
-      - main
+      - develop
+    tags:
+      - v*
+env:
+  CDN_BUCKET: gs://test_cdn_starter
 
 jobs:
+
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # https://github.com/marketplace/actions/extract-version-from-tag
+      - name: Extract version from tag
+        uses: damienaicheh/extract-version-from-tag-action@v1.0.0
+
       - name: Use Node.js 16
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
- 
+
       - name: Install Dependencies
         run: npm i --legacy-peer-deps
-        
+
       - name: Build
         run: npm run build
-        
+
       - name: Verify contents
         run: ls -la
 
@@ -34,7 +46,4 @@ jobs:
           export_default_credentials: true
 
       - name: Deploy Web component
-        run: gsutil rsync -d -r dist gs://test_cdn_starter
-
-#       - name: Invalidate CDN Cache
-#         run: gcloud compute url-maps invalidate-cdn-cache lb-web --path '/*' --async
+        run: gsutil rsync -m -d -r dist $CDN_BUCKET/$MAJOR.$MINOR.$PATCH
